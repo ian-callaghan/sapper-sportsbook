@@ -1,29 +1,17 @@
-<script context="module">
-    export async function preload(page, session) {
-        const res = await this.fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=20`,
-        )
-        const json = await res.json()
-        const fixtures = json.fixtures.fixtures
-        return { fixtures: json.fixtures }
-    }
-</script>
-
 <script>
-    import Header from "../components/Header.svelte"
-    import SectionHeader from "../components/SectionHeader.svelte"
-    import SectionSubHeader from "../components/SectionSubHeader.svelte"
-    import FlatButton from "../components/FlatButton.svelte"
-    import FixtureGroup from "../components/FixtureGroup.svelte"
-    import HomeAwayHeader from "../components/HomeAwayHeader.svelte"
-    import Advert from "../components/Advert.svelte"
-    import SideMenu from "../components/SideMenu.svelte"
-    import Fixtures from "../components/Fixtures.svelte"
+    import Header from "./Header.svelte"
+    import SectionHeader from "./SectionHeader.svelte"
+    import SectionSubHeader from "./SectionSubHeader.svelte"
+    import FlatButton from "./FlatButton.svelte"
+    import FixtureGroup from "./FixtureGroup.svelte"
+    import HomeAwayHeader from "./HomeAwayHeader.svelte"
+    import Advert from "./Advert.svelte"
+    import SideMenu from "./SideMenu.svelte"
+    import Fixtures from "./Fixtures.svelte"
 
-    import { isOperaMini } from "../components/stores.js"
+    import { isOperaMini } from "./stores.js"
 
     let menuOpen = false
-    export let fixtures
 </script>
 
 <style>
@@ -40,10 +28,6 @@
         display: none;
     }
 </style>
-
-<svelte:head>
-    <title>Sapper project template</title>
-</svelte:head>
 
 {#if menuOpen}
     <SideMenu
@@ -72,6 +56,6 @@
         <SectionSubHeader>
             <HomeAwayHeader title="Bundesliga 1" />
         </SectionSubHeader>
-        <Fixtures data={fixtures} />
+        <Fixtures />
     </main>
 </div>
