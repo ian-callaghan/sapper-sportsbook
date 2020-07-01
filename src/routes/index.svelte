@@ -1,10 +1,10 @@
 <script context="module">
     export async function preload(page, session) {
         const res = await this.fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=20`,
+            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=10`,
         )
         const json = await res.json()
-        const fixtures = json.fixtures.fixtures
+        const fixtures = json.fixtures ? json.fixtures.fixtures : {}
         return { fixtures: json.fixtures }
     }
 </script>
@@ -22,22 +22,12 @@
 
     import { isOperaMini } from "../components/stores.js"
 
-    let menuOpen = false
     export let fixtures
 </script>
 
 <style>
-    main {
-        top: 45px;
-        position: absolute;
-        width: 100%;
-        max-width: 100%;
-    }
     .button-row {
         display: flex;
-    }
-    .menu-open-opera-mini {
-        display: none;
     }
 </style>
 
@@ -45,33 +35,21 @@
     <title>Sapper project template</title>
 </svelte:head>
 
-{#if menuOpen}
-    <SideMenu
-        on:close-click={_ => {
-            menuOpen = false
-        }} />
-{/if}
-
-<div class:menu-open-opera-mini={isOperaMini && menuOpen}>
-    <Header
-        on:menu-click={_ => {
-            menuOpen = true
-        }} />
-    <main>
-        <Advert />
-        <SectionHeader name="Popular Leagues" />
-        <div class="button-row">
-            <FlatButton amount="34">Premier League</FlatButton>
-            <FlatButton amount="42">Bundesliga</FlatButton>
-        </div>
-        <div class="button-row">
-            <FlatButton amount="14">La Liga</FlatButton>
-            <FlatButton amount="7">France Ligue</FlatButton>
-        </div>
-        <SectionHeader name="All Matches" />
-        <SectionSubHeader>
-            <HomeAwayHeader title="Bundesliga 1" />
-        </SectionSubHeader>
-        <Fixtures data={fixtures} />
-    </main>
+<Advert />
+<SectionHeader name="Popular Leagues" />
+<div class="button-row">
+    <FlatButton amount="34">Premier League</FlatButton>
+    <FlatButton amount="42">Bundesliga</FlatButton>
 </div>
+<div class="button-row">
+    <FlatButton amount="14">La Liga</FlatButton>
+    <FlatButton amount="7">France Ligue</FlatButton>
+</div>
+<SectionHeader name="All Matches" />
+<SectionSubHeader>
+    <HomeAwayHeader title="Bundesliga 1" />
+</SectionSubHeader>
+
+{#if fixtures}
+    <Fixtures data={fixtures} />
+{/if}

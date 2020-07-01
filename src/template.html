@@ -28,7 +28,10 @@
         <!-- The application will be rendered inside this element,
 	     because `src/client.js` references it -->
         <div id="sapper">%sapper.html%</div>
-        <!-- polyfill.io's fetch fails with "Unsupported BodyInit type" in IE11 -->
+        <script src="url.js" ></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CMap%2CArray.from" crossorigin="anonymous"></script> 
+        <script src=promise.js></script> 
+        <script src=https://cdn.jsdelivr.net/npm/whatwg-fetch@3.0.0/dist/fetch.umd.min.js crossorigin="anonymous"></script>
         <!-- Sapper creates a <script> tag containing `src/client.js`
 	     and anything else it needs to hydrate the app and
 	     initialise the router -->

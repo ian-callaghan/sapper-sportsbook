@@ -1,5 +1,7 @@
 <script>
     import { createEventDispatcher } from "svelte"
+    import { isOperaMini } from "./stores.js"
+
     const dispatch = createEventDispatcher()
 </script>
 
@@ -25,6 +27,8 @@
 
     .menu-flex {
         display: flex;
+        color: #ebebeb;
+        position: relative;
     }
 
     .burger-icon {
@@ -35,12 +39,32 @@
         color: #f1cb01;
         font-weight: 500;
     }
+    .no-script-zone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .hidden-link {
+        display: none;
+    }
 </style>
 
 <header>
     <div class="menu-flex" on:click={_ => dispatch('menu-click')}>
         <img class="burger-icon" src="/burger.svg" alt="A-Z menu" />
         <span>A-Z</span>
+        <a
+            class:hidden-link={!isOperaMini}
+            rel="external"
+            href="/main-menu"
+            class="no-script-zone">
+            {' '}
+        </a>
+        <noscript>
+            <a rel="external" href="/main-menu" class="no-script-zone">{' '}</a>
+        </noscript>
     </div>
     <span>Live</span>
     <img src="/logo.svg" alt="Rivalo brand logo" />

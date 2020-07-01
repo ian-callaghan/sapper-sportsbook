@@ -4,6 +4,7 @@
     import { isOperaMini } from "./stores.js"
 
     const dispatch = createEventDispatcher()
+    export let ref = null
 </script>
 
 <style>
@@ -74,9 +75,16 @@
         <SideMenuLink>Next 48 hours</SideMenuLink>
         <SideMenuLink>By date</SideMenuLink>
     </div>
-    <button
+    <!-- <button
         class:button-opera-mini={isOperaMini}
         on:click={_ => dispatch('close-click')}>
         <img src="/menu_close.svg" alt="close" />
-    </button>
+    </button> -->
+    <a href={ref}>
+        <button
+            class:button-opera-mini={isOperaMini}
+            on:click={_ => dispatch('close-click')}>
+            <img src="/menu_close.svg" alt="close" />
+        </button>
+    </a>
 </aside>
