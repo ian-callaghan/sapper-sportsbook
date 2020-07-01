@@ -36,6 +36,11 @@ polka() // You can also use Express
                 referer: req.headers.referer,
                 count: req.session.count || 1,
                 betslip: req.session.betslip || [],
+                userAgent: req.headers["user-agent"],
+                operaMini:
+                    req.headers["user-agent"].indexOf("Opera Mini") > -1
+                        ? true
+                        : false,
             }),
         }),
     )

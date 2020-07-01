@@ -9,9 +9,7 @@
     import SideMenu from "./SideMenu.svelte"
     import Fixtures from "./Fixtures.svelte"
 
-    import { isOperaMini } from "./stores.js"
-
-    let menuOpen = false
+    import { stores } from "@sapper/app"
 </script>
 
 <style>
@@ -35,7 +33,6 @@
             menuOpen = false
         }} />
 {/if}
-
 <div class:menu-open-opera-mini={isOperaMini && menuOpen}>
     <Header
         on:menu-click={_ => {
@@ -56,6 +53,6 @@
         <SectionSubHeader>
             <HomeAwayHeader title="Bundesliga 1" />
         </SectionSubHeader>
-        <Fixtures />
     </main>
 </div>
+<div>adasda{userAgent}</div>

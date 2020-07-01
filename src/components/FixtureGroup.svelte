@@ -1,7 +1,9 @@
 <script>
-    import { isOperaMini } from "./stores.js"
     import Odds from "./Odds.svelte"
     import OddsGroup from "./OddsGroup.svelte"
+    import { stores } from "@sapper/app"
+    const { session } = stores()
+    const { operaMini } = $session
 
     export let fixture
     $: mainMarket = fixture.markets[0] || []
@@ -75,13 +77,13 @@
     <div class="details">
         <div class="team">
             <span class="score">1</span>
-            <span class:name-mini={isOperaMini}>
+            <span class:name-mini={operaMini}>
                 {fixture.name.split(' v ')[0]}
             </span>
         </div>
         <div class="team team-b">
             <span class="score">0</span>
-            <span class:name-mini={isOperaMini}>
+            <span class:name-mini={operaMini}>
                 {fixture.name.split(' v ')[1]}
             </span>
         </div>

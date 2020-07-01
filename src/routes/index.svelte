@@ -20,8 +20,6 @@
     import SideMenu from "../components/SideMenu.svelte"
     import Fixtures from "../components/Fixtures.svelte"
 
-    import { isOperaMini } from "../components/stores.js"
-
     export let fixtures
     import { stores } from "@sapper/app"
     const { session } = stores()
