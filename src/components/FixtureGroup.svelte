@@ -65,6 +65,9 @@
         border: none;
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -88,9 +91,9 @@
     <OddsGroup filled>
         {#each mainMarket.outcomes as outcome}
             <div class="odds">
-                <!-- <button form="bets" name="selection" value={fixture.name}> -->
-                <Odds value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
-                <!-- </button> -->
+                <button form="bets" name="selection" value={fixture.name}>
+                    <Odds value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
+                </button>
             </div>
         {/each}
     </OddsGroup>
