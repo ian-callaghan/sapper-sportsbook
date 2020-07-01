@@ -1,7 +1,7 @@
 <script context="module">
     export async function preload(page, session) {
         const res = await this.fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=10`,
+            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=2`,
         )
         const json = await res.json()
         const fixtures = json.fixtures ? json.fixtures.fixtures : {}
@@ -23,6 +23,8 @@
     import { isOperaMini } from "../components/stores.js"
 
     export let fixtures
+    import { stores } from "@sapper/app"
+    const { session } = stores()
 </script>
 
 <style>
@@ -53,3 +55,10 @@
 {#if fixtures}
     <Fixtures data={fixtures} />
 {/if}
+
+{#if $session.betslip.length}
+    <div>My betslip contains:</div>
+{/if}
+{#each $session.betslip as name}
+    <div>{name}</div>
+{/each}

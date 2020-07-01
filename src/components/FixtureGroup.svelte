@@ -58,6 +58,14 @@
         height: 100%;
         display: flex;
     }
+    button {
+        padding: 0;
+        margin: 0;
+        background: none;
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <div class="container">
@@ -76,13 +84,16 @@
         </div>
         <span class="info">11' {fixture.markets.length}</span>
     </div>
+    <!-- <form action="/" method="post"> -->
     <OddsGroup filled>
         {#each mainMarket.outcomes as outcome}
             <div class="odds">
-                <Odds
-                    disabled={!outcome}
-                    value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
+                <button form="bets" name="selection" value={fixture.name}>
+                    <Odds value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
+                </button>
             </div>
         {/each}
     </OddsGroup>
+    <!-- </form> -->
 </div>
+<form action="/" method="post" id="bets" />

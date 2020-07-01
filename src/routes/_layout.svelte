@@ -5,6 +5,11 @@
     import { isOperaMini } from "../components/stores.js"
 
     let menuOpen = false
+    import { stores } from "@sapper/app"
+    const { preloading, page, session } = stores()
+    session.subscribe(value => {
+        console.log(value)
+    })
 </script>
 
 <style>

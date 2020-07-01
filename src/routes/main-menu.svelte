@@ -7,7 +7,6 @@
 <script>
     import SideMenu from "../components/SideMenu.svelte"
     export let referer
-    console.log(referer)
 </script>
 
 <SideMenu ref={referer} />
