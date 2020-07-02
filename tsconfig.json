@@ -1,0 +1,18 @@
+{
+    "include": ["src/**/*"],
+    "exclude": ["node_modules/*"],
+    "compilerOptions": {
+        "target": "es2015",
+        "allowSyntheticDefaultImports": true,
+        "module": "es2015",
+        "types": ["node", "@sapper", "sirv"], // add the last two to the existing types
+        "baseUrl": "./src",
+        "moduleResolution": "node",
+        "strict": true,
+        "typeRoots": [
+            "./node_modules/svelte-types",
+            "./node_modules/@types",
+            "typings"
+        ] // add line
+    }
+}

@@ -1,7 +1,7 @@
 <script context="module">
     export async function preload(page, session) {
         const res = await this.fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=2`,
+            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=1`,
         )
         const json = await res.json()
         const fixtures = json.fixtures ? json.fixtures.fixtures : {}
@@ -9,7 +9,7 @@
     }
 </script>
 
-<script>
+<script lang="typescript">
     import Header from "../components/Header.svelte"
     import SectionHeader from "../components/SectionHeader.svelte"
     import SectionSubHeader from "../components/SectionSubHeader.svelte"
@@ -20,7 +20,7 @@
     import SideMenu from "../components/SideMenu.svelte"
     import Fixtures from "../components/Fixtures.svelte"
 
-    export let fixtures
+    export let fixtures: any[]
     import { stores } from "@sapper/app"
     const { session } = stores()
 </script>

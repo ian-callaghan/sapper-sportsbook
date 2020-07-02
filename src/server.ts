@@ -4,6 +4,7 @@ import compression from "compression"
 import * as sapper from "@sapper/server"
 import bodyParser from "body-parser"
 import session from "express-session"
+import express from "express"
 import sessionFileStore from "session-file-store"
 
 const FileStore = sessionFileStore(session)
@@ -32,18 +33,19 @@ polka() // You can also use Express
         compression({ threshold: 0 }),
         sirv("static", { dev }),
         sapper.middleware({
-            session: (req, res) => ({
+            session: (req: express.Request, res: express.Response) => ({
                 referer: req.headers.referer,
-                count: req.session.count || 1,
-                betslip: req.session.betslip || [],
+                count: req.session?.count || 1,
+                betslip: req.session?.betslip || [],
                 userAgent: req.headers["user-agent"],
                 operaMini:
+                    req.headers["user-agent"] &&
                     req.headers["user-agent"].indexOf("Opera Mini") > -1
                         ? true
                         : false,
             }),
         }),
     )
-    .listen(PORT, (err) => {
+    .listen(PORT, (err: Error) => {
         if (err) console.log("error", err)
     })

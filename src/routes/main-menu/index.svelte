@@ -5,7 +5,7 @@
 </script>
 
 <script>
-    import SideMenu from "../components/SideMenu.svelte"
+    import SideMenu from "../../components/SideMenu.svelte"
     export let referer
 </script>
 
