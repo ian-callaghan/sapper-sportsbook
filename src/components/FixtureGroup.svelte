@@ -89,16 +89,20 @@
         </div>
         <span class="info">11' {fixture.markets.length}</span>
     </div>
-    <!-- <form action="/" method="post"> -->
     <OddsGroup filled>
         {#each mainMarket.outcomes as outcome}
             <div class="odds">
-                <button form="bets" name="selection" value={fixture.name}>
+                <button
+                    form="bets"
+                    name="selection"
+                    value={fixture.name}
+                    on:click={e => {
+                        e.preventDefault()
+                    }}>
                     <Odds value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
                 </button>
             </div>
         {/each}
     </OddsGroup>
-    <!-- </form> -->
 </div>
 <form action="/" method="post" id="bets" />
