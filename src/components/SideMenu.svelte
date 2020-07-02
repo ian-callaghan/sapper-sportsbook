@@ -1,9 +1,10 @@
 <script>
     import SideMenuLink from "./SideMenuLink.svelte"
     import { createEventDispatcher } from "svelte"
-    import { stores } from "@sapper/app"
-    const { session } = stores()
-    const { operaMini } = $session
+    import { browserNoJS } from "./stores"
+
+    let noJS
+    browserNoJS.subscribe(v => (noJS = v))
 
     const dispatch = createEventDispatcher()
     export let ref = null
@@ -67,24 +68,17 @@
 </style>
 
 <aside>
-    <div class="menu" class:menu-opera-mini={operaMini}>
-        <div
-            class="search-container"
-            class:search-container-opera-mini={operaMini}>
+    <div class="menu" class:menu-opera-mini={noJS}>
+        <div class="search-container" class:search-container-opera-mini={noJS}>
             <div class="search">Search</div>
         </div>
         <SideMenuLink>Live</SideMenuLink>
         <SideMenuLink>Next 48 hours</SideMenuLink>
         <SideMenuLink>By date</SideMenuLink>
     </div>
-    <!-- <button
-        class:button-opera-mini={operaMini}
-        on:click={_ => dispatch('close-click')}>
-        <img src="/menu_close.svg" alt="close" />
-    </button> -->
     <a href={ref}>
         <button
-            class:button-opera-mini={operaMini}
+            class:button-opera-mini={noJS}
             on:click={_ => dispatch('close-click')}>
             <img src="/menu_close.svg" alt="close" />
         </button>

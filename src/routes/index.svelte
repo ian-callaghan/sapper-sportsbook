@@ -1,15 +1,14 @@
 <script context="module">
     export async function preload(page, session) {
         const res = await this.fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=1`,
+            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=2`,
         )
         const json = await res.json()
-        const fixtures = json.fixtures ? json.fixtures.fixtures : {}
         return { fixtures: json.fixtures }
     }
 </script>
 
-<script lang="typescript">
+<script>
     import Header from "../components/Header.svelte"
     import SectionHeader from "../components/SectionHeader.svelte"
     import SectionSubHeader from "../components/SectionSubHeader.svelte"
@@ -19,9 +18,9 @@
     import Advert from "../components/Advert.svelte"
     import SideMenu from "../components/SideMenu.svelte"
     import Fixtures from "../components/Fixtures.svelte"
-
-    export let fixtures: any[]
     import { stores } from "@sapper/app"
+
+    export let fixtures
     const { session } = stores()
 </script>
 
@@ -31,6 +30,7 @@
     }
 </style>
 
+<!--using typescript here fixtures fails to populate - WTF-->
 <svelte:head>
     <title>Sapper project template</title>
 </svelte:head>

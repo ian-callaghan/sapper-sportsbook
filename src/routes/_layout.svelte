@@ -1,8 +1,18 @@
 <script>
     import Header from "../components/Header.svelte"
     import SideMenu from "../components/SideMenu.svelte"
+    import { onMount } from "svelte"
 
     let menuOpen = false
+    import { stores } from "@sapper/app"
+    import { browserNoJS } from "../components/stores"
+    const { session } = stores()
+
+    let noJS
+    browserNoJS.subscribe(v => (noJS = v))
+    onMount(async () => {
+        browserNoJS.update(_ => $session.operaMini)
+    })
 </script>
 
 <style>
@@ -30,5 +40,6 @@
 <div>
     <main>
         <slot />
+        <div>JS Disabled: {noJS}</div>
     </main>
 </div>

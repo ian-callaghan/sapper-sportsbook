@@ -1,12 +1,27 @@
 <script>
     import Odds from "./Odds.svelte"
     import OddsGroup from "./OddsGroup.svelte"
+    import { browserNoJS } from "./stores"
+    import * as api from "../api"
     import { stores } from "@sapper/app"
     const { session } = stores()
     const { operaMini } = $session
 
+    let noJS
+    browserNoJS.subscribe(v => (noJS = v))
+
     export let fixture
     $: mainMarket = fixture.markets[0] || []
+
+    const onOddsClick = async name => {
+        const result = await api.updateBetSlip(name)
+        session.update(v => {
+            return {
+                ...v,
+                betslip: result,
+            }
+        })
+    }
 </script>
 
 <style>
@@ -96,13 +111,13 @@
                     form="bets"
                     name="selection"
                     value={fixture.name}
-                    on:click={e => {
-                        e.preventDefault()
-                    }}>
+                    on:click={_ => onOddsClick(fixture.name)}>
                     <Odds value={outcome ? outcome.odds.toFixed(2) : '0.00'} />
                 </button>
             </div>
         {/each}
     </OddsGroup>
 </div>
-<form action="/" method="post" id="bets" />
+{#if noJS}
+    <form action="/" method="post" id="bets" />
+{/if}

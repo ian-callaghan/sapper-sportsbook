@@ -2,7 +2,10 @@
     import { createEventDispatcher } from "svelte"
     import { stores } from "@sapper/app"
     const { session } = stores()
-    const { operaMini } = $session
+    import { browserNoJS } from "./stores"
+
+    let noJS
+    browserNoJS.subscribe(v => (noJS = v))
 
     const dispatch = createEventDispatcher()
 </script>
@@ -58,7 +61,7 @@
         <img class="burger-icon" src="/burger.svg" alt="A-Z menu" />
         <span>A-Z</span>
         <a
-            class:hidden-link={!operaMini}
+            class:hidden-link={!noJS}
             rel="external"
             href="/main-menu"
             class="no-script-zone">
