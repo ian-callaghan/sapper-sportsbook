@@ -1,5 +1,7 @@
 <script context="module">
-    export async function preload(page, session) {
+    // This also runs when we update session client side
+    // I do not know why, it should only on route changes afaik
+    export async function preload(page) {
         const res = await this.fetch(
             `https://quiet-bastion-27219.herokuapp.com/fixtures?first=2`,
         )

@@ -1,15 +1,15 @@
 <script>
     import FixtureGroup from "./FixtureGroup.svelte"
 
-    const getFixtures = async (cursor = "") => {
-        const res = await fetch(
-            `https://quiet-bastion-27219.herokuapp.com/fixtures?first=20&after=${cursor}`,
-        )
-        const json = await res.json()
-        fixtures = (fixtures || []).concat(json.fixtures.fixtures)
-        return json.fixtures
-    }
-    let fixturesPromise // = getFixtures()
+    // const getFixtures = async (cursor = "") => {
+    //     const res = await fetch(
+    //         `https://quiet-bastion-27219.herokuapp.com/fixtures?first=20&after=${cursor}`,
+    //     )
+    //     const json = await res.json()
+    //     fixtures = (fixtures || []).concat(json.fixtures.fixtures)
+    //     return json.fixtures
+    // }
+    // let fixturesPromise // = getFixtures()
     export let data
 </script>
 
